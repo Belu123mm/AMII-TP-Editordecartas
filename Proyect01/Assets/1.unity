@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -140,22 +140,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 210753188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11efc99b7050604aad6a752d02bfd57, type: 3}
+  m_Script: {fileID: 11500000, guid: d631f024cce88be4a974ba73ae465157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  CardType: []
+  illustration: {fileID: 0}
   life: 0
   energy: 0
-  atack: 0
+  attack: 0
   defense: 0
-  manaCost: 0
+  mana: 0
   stars: 0
   description: 
-  backgroundCard: {fileID: 0}
-  framework: {fileID: 0}
-  cardName: 
+  background: {fileID: 0}
+  frame: {fileID: 0}
+  back: {fileID: 0}
+  cardname: 
   autorSign: 
+  cardtype: 
+  cost: 0
+  ability: 
 --- !u!23 &210753190
 MeshRenderer:
   m_ObjectHideFlags: 0
