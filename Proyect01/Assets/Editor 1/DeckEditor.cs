@@ -9,11 +9,8 @@ public class DeckEditor : Editor
 {
     private Deck _deck;
     private GameObject topCard;
-    private bool add;
-    private bool remove;
-    private bool shuffle;
-    private bool empty;
-    private bool removeSpecific;
+    private int deckMaxCards;
+    private int cardCounter;
 
     private void OnEnable()
     {
@@ -24,27 +21,20 @@ public class DeckEditor : Editor
     public override void OnInspectorGUI()
     {
         _deck.card2Add = (GameObject)EditorGUILayout.ObjectField("Card to add", _deck.card2Add, typeof(GameObject), false);
+        deckMaxCards = EditorGUILayout.IntField("Max card ammount", deckMaxCards);
         //topCard = (GameObject)EditorGUILayout.ObjectField("Top card", topCard, typeof(GameObject), true);
-        add = EditorGUILayout.Toggle("Add to deck", add);
-        remove = EditorGUILayout.Toggle("remove from deck", remove);
-        shuffle = EditorGUILayout.Toggle("Shuffle deck", shuffle);
-        empty = EditorGUILayout.Toggle("Empty deck", empty);
-        removeSpecific = EditorGUILayout.Toggle("Remove the card", removeSpecific);
-        for (int i = 0; i < _deck.mainDeck.Count; i++)
-        {
-            _deck.mainDeck[i] = (GameObject)EditorGUILayout.ObjectField("Deck layout", _deck.mainDeck[i], typeof(GameObject), false);
-        }
-        if (add)
+
+        if (GUILayout.Button("Add card") && cardCounter <= deckMaxCards)
         {
             _deck.mainDeck.Add(_deck.card2Add);
-            add = false;
+            cardCounter++;
         }
-        if (remove && _deck.mainDeck.Count >= 1)
+        if (GUILayout.Button("Remove last added card") && _deck.mainDeck.Count >= 1)
         {
             _deck.mainDeck.RemoveAt(_deck.mainDeck.Count - 1);
-            remove = false;
+            cardCounter--;
         }
-        if (shuffle)
+        if (GUILayout.Button("Shuffle deck"))
         {
             int n = _deck.mainDeck.Count;
             var rng = new Random();
@@ -56,17 +46,22 @@ public class DeckEditor : Editor
                 _deck.mainDeck[k] = _deck.mainDeck[n];
                 _deck.mainDeck[n] = value;
             }
-            shuffle = false;
         }
-        if (removeSpecific)
+        if (GUILayout.Button("Remove specific card"))
         {
             _deck.mainDeck.Remove(_deck.card2Add);
-            removeSpecific = false;
+            cardCounter--;
         }
-        if (empty)
+        if (GUILayout.Button("Empty deck"))
         {
             _deck.mainDeck.RemoveRange(0, _deck.mainDeck.Count);
-            empty = false;
+            cardCounter = 0;
         }
+
+        for (int i = 0; i < _deck.mainDeck.Count; i++)
+        {
+            _deck.mainDeck[i] = (GameObject)EditorGUILayout.ObjectField("Deck layout", _deck.mainDeck[i], typeof(GameObject), false);
+        }
+
     }
 }
