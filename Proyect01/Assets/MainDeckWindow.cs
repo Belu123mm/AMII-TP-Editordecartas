@@ -51,7 +51,10 @@ public class MainDeckWindow : EditorWindow {
         EditorGUI.DrawRect(GUILayoutUtility.GetRect(100, 2), Color.black);
         EditorGUILayout.Space();
 
-       
+        DrawButtonTableCreator();
+
+
+
 
     }
 
@@ -63,6 +66,17 @@ public class MainDeckWindow : EditorWindow {
     private void DrawText()
     {
         GUILayout.Label("Bienvenido a My Deck Builder, con esta ventana principal podras comenzar a crear tu maso de cartas deseado.");
+    }
+
+    private void DrawButtonTableCreator()
+    {
+        if (GUILayout.Button("TableCreator"))
+        {
+
+            TableCreator.OpenWindow(newWindowAmount);
+            newWindowAmount++;
+        }
+
     }
 
 }
