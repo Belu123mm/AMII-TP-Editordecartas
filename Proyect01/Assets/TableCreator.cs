@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class TableCreator : EditorWindow {
+public class TableCreator : EditorWindow
+{
 
-    public int WidthSize;
-    public int LongSize;
+    public float WidthSize;
+    public float LongSize;
     public Texture2D Design;
 
 
@@ -17,7 +18,7 @@ public class TableCreator : EditorWindow {
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnGUI()
@@ -32,15 +33,18 @@ public class TableCreator : EditorWindow {
     {
         GUILayout.BeginHorizontal();
 
-        WidthSize = EditorGUILayout.IntField("Ancho",WidthSize);
-        LongSize = EditorGUILayout.IntField("Largo", LongSize);
+        WidthSize = EditorGUILayout.FloatField("Ancho", WidthSize,GUILayout.ExpandWidth(false));
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+        LongSize = EditorGUILayout.FloatField("Largo", LongSize, GUILayout.ExpandWidth(false));
 
         GUILayout.EndHorizontal();
     }
 
     private void TextureField()
     {
-        Design = (Texture2D)EditorGUILayout.ObjectField("Diseño: ", Design, typeof(Texture2D), true);
+        Design = (Texture2D)EditorGUILayout.ObjectField("Diseño:", Design, typeof(Texture2D), true);
     }
 
     private void CreateButton()
@@ -49,7 +53,11 @@ public class TableCreator : EditorWindow {
         {
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             plane.transform.localScale = new Vector3(WidthSize, 1, LongSize);
-            plane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", Design);
+            if (Design != null)
+            {
+                plane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", Design);
+            }
+
         }
         Repaint();
     }
