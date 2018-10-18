@@ -75,40 +75,47 @@ public class TableCreator : EditorWindow
     {
         if (GUILayout.Button("Create", GUILayout.MaxWidth(500), GUILayout.ExpandWidth(false)))
         {
-            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            plane.transform.localScale = new Vector3(WidthSize, 1, LongSize);
-            plane.name = Name;
-
-            if (Name == null)
+            if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null)))
             {
-                EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Error);
-                //TODO que no cree nada y diga el error
-            }
+                GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                plane.transform.localScale = new Vector3(WidthSize, 1, LongSize);
+                plane.name = Name;
 
+                if (Design != null)
+                {
+                    plane.GetComponent<MeshRenderer>().sharedMaterial.SetTexture("_MainTex", Design);
+                }
 
-            if (WidthSize == 0 || LongSize == 0)
-            {
-                EditorGUILayout.HelpBox("Las medidas de Ancho y Largo no pueden valer 0.", MessageType.Error);
-                //TODO que no cree nada y diga el error
+                if (Material != null)
+                {
+                    plane.GetComponent<MeshRenderer>().material = Material;
+                }
             }
+           
+        }
+
+        if (Name == null)
+        {
+            EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Error);
             
-            if (Design != null)
-            {
-                plane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", Design);
-            }
+        }
 
-            if (Material != null)
-            {
-                plane.GetComponent<MeshRenderer>().material = Material;
-            }
-
-            if ( Design != null && Material != null)
-            {
-                EditorGUILayout.HelpBox("El objeto no puede tener una textura y un material al mismo tiempo", MessageType.Error);
-                //TODO que no cree nada y diga el error
-            }
-
-        }       
+        if (WidthSize == 0 || LongSize == 0)
+        {
+            EditorGUILayout.HelpBox("Las medidas de Ancho y Largo no pueden valer 0.", MessageType.Error);
+            
+        }
+        
+        if (Design != null && Material != null)
+        {
+            EditorGUILayout.HelpBox("El objeto no puede tener una textura y un material al mismo tiempo", MessageType.Error);
+            
+        }
+        if (Design == null && Material == null)
+        {
+            EditorGUILayout.HelpBox("El objeto debe tener o una textura o un material", MessageType.Error);
+            
+        }
         Repaint();
     }
 
