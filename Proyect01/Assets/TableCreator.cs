@@ -49,7 +49,7 @@ public class TableCreator : EditorWindow {
         {
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             plane.transform.localScale = new Vector3(WidthSize, 1, LongSize);
-            plane.GetComponent<Texture2D>();
+            plane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", Design);
         }
         Repaint();
     }
