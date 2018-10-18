@@ -11,7 +11,6 @@ public class CardCustomEditor : Editor {
         card = (BaseCard) target;
     }
     public override void OnInspectorGUI() {
-        base.OnInspectorGUI();
         CardName();
         Images();
         Stats();
@@ -30,12 +29,14 @@ public class CardCustomEditor : Editor {
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Marco", GUILayout.Width(80));
         card.frame = (Texture2D) EditorGUILayout.ObjectField(card.frame, typeof(Texture2D), true);
-        //Aca va lo de mostrar la textura, pero no estoy segura como hacerlo xd 
+        Texture2D framepreview = AssetPreview.GetAssetPreview(card.frame);
+        GUILayout.Box(framepreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Fondo", GUILayout.Width(80));
         card.background = (Texture2D) EditorGUILayout.ObjectField(card.background, typeof(Texture2D), true);
-        //Aca va lo de mostrar la textura, pero no estoy segura como hacerlo xd 
+        Texture2D backgroundpreview = AssetPreview.GetAssetPreview(card.background);
+        GUILayout.Box(backgroundpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
 
@@ -43,15 +44,17 @@ public class CardCustomEditor : Editor {
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Ilustracion", GUILayout.Width(80));
         card.illustration = (Texture2D) EditorGUILayout.ObjectField(card.illustration, typeof(Texture2D), true);
-        //Aca va lo de mostrar la textura, pero no estoy segura como hacerlo xd 
+        Texture2D illustrationpreview = AssetPreview.GetAssetPreview(card.illustration);
+        GUILayout.Box(illustrationpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Reverso", GUILayout.Width(80));
         card.back = (Texture2D) EditorGUILayout.ObjectField(card.back, typeof(Texture2D), true);
-        //Aca va lo de mostrar la textura, pero no estoy segura como hacerlo xd 
+        Texture2D backpreview = AssetPreview.GetAssetPreview(card.back);
+        GUILayout.Box(backpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
-
+        Repaint();
     }
     void Stats() {
         EditorGUILayout.BeginHorizontal();
