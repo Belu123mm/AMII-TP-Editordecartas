@@ -6,9 +6,11 @@ using UnityEditor;
 public class TableCreator : EditorWindow
 {
 
+    public string Name;
     public float WidthSize;
     public float LongSize;
     public Texture2D Design;
+    public Material Material;
 
 
     public static void OpenWindow(int times)
@@ -23,10 +25,29 @@ public class TableCreator : EditorWindow
 
     private void OnGUI()
     {
+        NameField();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+
+
         SizeFields();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
         TextureField();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
         CreateButton();
 
+    }
+    private void NameField()
+    {
+        Name = EditorGUILayout.TextField("Nombre:", Name);
     }
 
     private void SizeFields()
@@ -44,7 +65,10 @@ public class TableCreator : EditorWindow
 
     private void TextureField()
     {
+        GUILayout.BeginHorizontal();
         Design = (Texture2D)EditorGUILayout.ObjectField("Diseño:", Design, typeof(Texture2D), true);
+        Material = (Material)EditorGUILayout.ObjectField(Material, typeof(Material), true);
+        GUILayout.EndHorizontal();
     }
 
     private void CreateButton()
@@ -53,12 +77,38 @@ public class TableCreator : EditorWindow
         {
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             plane.transform.localScale = new Vector3(WidthSize, 1, LongSize);
+            plane.name = Name;
+
+            if (Name == null)
+            {
+                EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Error);
+                //TODO que no cree nada y diga el error
+            }
+
+
+            if (WidthSize == 0 || LongSize == 0)
+            {
+                EditorGUILayout.HelpBox("Las medidas de Ancho y Largo no pueden valer 0.", MessageType.Error);
+                //TODO que no cree nada y diga el error
+            }
+            
             if (Design != null)
             {
                 plane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", Design);
             }
 
-        }
+            if (Material != null)
+            {
+                plane.GetComponent<MeshRenderer>().material = Material;
+            }
+
+            if ( Design != null && Material != null)
+            {
+                EditorGUILayout.HelpBox("El objeto no puede tener una textura y un material al mismo tiempo", MessageType.Error);
+                //TODO que no cree nada y diga el error
+            }
+
+        }       
         Repaint();
     }
 
