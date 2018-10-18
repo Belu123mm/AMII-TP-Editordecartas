@@ -96,24 +96,24 @@ public class TableCreator : EditorWindow
 
         if (Name == null)
         {
-            EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Error);
+            EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Warning);
             
         }
 
         if (WidthSize == 0 || LongSize == 0)
         {
-            EditorGUILayout.HelpBox("Las medidas de Ancho y Largo no pueden valer 0.", MessageType.Error);
+            EditorGUILayout.HelpBox("Las medidas de Ancho y Largo no pueden valer 0.", MessageType.Warning);
             
         }
         
         if (Design != null && Material != null)
         {
-            EditorGUILayout.HelpBox("El objeto no puede tener una textura y un material al mismo tiempo", MessageType.Error);
+            EditorGUILayout.HelpBox("El objeto no puede tener una textura y un material al mismo tiempo", MessageType.Warning);
             
         }
         if (Design == null && Material == null)
         {
-            EditorGUILayout.HelpBox("El objeto debe tener o una textura o un material", MessageType.Error);
+            EditorGUILayout.HelpBox("El objeto debe tener o una textura o un material", MessageType.Warning);
             
         }
         Repaint();
