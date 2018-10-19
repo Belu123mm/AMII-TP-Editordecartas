@@ -11,11 +11,11 @@ public class DeckEditor : Editor
     private GameObject topCard;
     private int deckMaxCards;
     private int cardCounter;
+    float counter = 0;
 
     private void OnEnable()
     {
         _deck = (Deck)target;
-        topCard = _deck.mainDeck[0];
     }
 
     public override void OnInspectorGUI()
@@ -24,7 +24,7 @@ public class DeckEditor : Editor
         deckMaxCards = EditorGUILayout.IntField("Max card ammount", deckMaxCards);
         //topCard = (GameObject)EditorGUILayout.ObjectField("Top card", topCard, typeof(GameObject), true);
 
-        if (GUILayout.Button("Add card") && cardCounter <= deckMaxCards)
+        if (GUILayout.Button("Add card") && cardCounter < deckMaxCards)
         {
             _deck.mainDeck.Add(_deck.card2Add);
             cardCounter++;
@@ -57,10 +57,22 @@ public class DeckEditor : Editor
             _deck.mainDeck.RemoveRange(0, _deck.mainDeck.Count);
             cardCounter = 0;
         }
-
+        Debug.Log(cardCounter);
         for (int i = 0; i < _deck.mainDeck.Count; i++)
-        {
-            _deck.mainDeck[i] = (GameObject)EditorGUILayout.ObjectField("Deck layout", _deck.mainDeck[i], typeof(GameObject), false);
+        { 
+            _deck.mainDeck[i] = (GameObject)EditorGUILayout.ObjectField(("Card "+ (i+1)), _deck.mainDeck[i], typeof(GameObject), false);
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.Height(20)) && cardCounter < deckMaxCards)
+            {
+                _deck.mainDeck.Add(_deck.mainDeck[i]);
+                cardCounter++;
+            }
+            if (GUILayout.Button("-", GUILayout.Width(20), GUILayout.Height(20)))
+            {
+                _deck.mainDeck.Remove(_deck.mainDeck[i]);
+                cardCounter--;
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
     }
