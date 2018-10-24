@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class MainDeckWindow : EditorWindow {
+public class MainTableWindow : EditorWindow {
 
     private GUIStyle _tittleStyle;
     private int newWindowAmount;
 
 
-    [MenuItem("CustomTools/MyDeckBuilder")]
+    [MenuItem("CustomTools/MyTableBuilder")]
     public static void OpenWindow()
     {
-        MainDeckWindow myWindow = (MainDeckWindow)GetWindow(typeof(MainDeckWindow));
+        MainTableWindow myWindow = (MainTableWindow)GetWindow(typeof(MainTableWindow));
         myWindow.wantsMouseMove = true;
         myWindow.Show();
     }
@@ -25,8 +25,8 @@ public class MainDeckWindow : EditorWindow {
         _tittleStyle.fontSize = 20;
         _tittleStyle.normal.textColor = Color.black;
 
-
-
+        minSize = new Vector2(625, 150);
+        maxSize = new Vector2(625, 150);
     }
 
     private void OnGUI()
@@ -60,12 +60,12 @@ public class MainDeckWindow : EditorWindow {
 
     private void DrawTittle()
     {
-        EditorGUILayout.LabelField("My Deck Builder", _tittleStyle);
+        EditorGUILayout.LabelField("My Table Builder", _tittleStyle);
     }
 
     private void DrawText()
     {
-        GUILayout.Label("Bienvenido a My Deck Builder, con esta ventana principal podras comenzar a crear tu maso de cartas deseado.");
+        GUILayout.Label("Bienvenido a My Table Builder, con esta ventana principal podras comenzar a crear tu tablero deseado.");
     }
 
     private void DrawButtonTableCreator()
