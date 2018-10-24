@@ -56,6 +56,7 @@ public class TableCreator : EditorWindow
             EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Warning);
         }
         //TODO cuando borras el nombre deberia volver a aparecer el warning pero este no reaparece
+
         Repaint();
     }
 
