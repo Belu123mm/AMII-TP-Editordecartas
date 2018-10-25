@@ -6,6 +6,8 @@ public class Deck : MonoBehaviour {
 
     public List<GameObject> mainDeck = new List<GameObject>();
     public GameObject card2Add;
+    public int deckMaxCards;
+    public int cardCounter;
 
-    
+
 }
