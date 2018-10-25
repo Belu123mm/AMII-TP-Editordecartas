@@ -40,12 +40,12 @@ public class DeckWindow : EditorWindow
                 if (counter > 4)
                 {
                     EditorGUILayout.EndHorizontal();
-                    GUILayout.Space(220);
+                    GUILayout.Space(100);
                     EditorGUILayout.BeginHorizontal();
                     counter = 0;
                 }
                 //EditorGUI.DrawPreviewTexture(GUILayoutUtility.GetRect(1, 1).SetWidth(200).SetHeight(200), texture);
-                GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100).SetWidth(100).SetHeight(100), texture, ScaleMode.ScaleToFit);
+                GUI.DrawTexture(GUILayoutUtility.GetRect(1, 1).SetWidth(100).SetHeight(100), texture, ScaleMode.ScaleToFit);
                 counter++;
                 if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.Height(20)) && _deck.cardCounter < _deck.deckMaxCards)
                 {
@@ -57,7 +57,7 @@ public class DeckWindow : EditorWindow
                     _deck.mainDeck.Remove(_deck.mainDeck[i]);
                     _deck.cardCounter--;
                 }
-                GUILayout.Space(10);
+                GUILayout.Space(60);
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndScrollView();
