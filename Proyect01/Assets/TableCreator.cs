@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class TableCreator : EditorWindow
 {
@@ -11,6 +12,8 @@ public class TableCreator : EditorWindow
     public float LongSize;
     public Texture2D Design;
     public Material Material;
+    public string Filter = "";
+    List<string> found = new List<string>();
 
 
     public static void OpenWindow(int times)
@@ -18,10 +21,15 @@ public class TableCreator : EditorWindow
         var Table = (TableCreator)GetWindow(typeof(TableCreator));
     }
 
+    public void UpdateDatabase()
+    {
+        AssetDatabase.Refresh();
+    }    
+
     private void OnEnable()
     {
-        minSize = new Vector2(500, 325);
-        maxSize = new Vector2(500, 325);
+        minSize = new Vector2(550, 350);
+        maxSize = new Vector2(550 ,8000);
     }
 
     private void OnGUI()
@@ -83,6 +91,8 @@ public class TableCreator : EditorWindow
         Design = (Texture2D)EditorGUILayout.ObjectField("Diseño:", Design, typeof(Texture2D), true);
         Material = (Material)EditorGUILayout.ObjectField(Material, typeof(Material), true);
         GUILayout.EndHorizontal();
+        SearchField();
+
 
         if (Design != null && Material != null)
         {
@@ -92,6 +102,40 @@ public class TableCreator : EditorWindow
         {
             EditorGUILayout.HelpBox("El objeto debe tener o una textura o un material", MessageType.Warning);
         }
+    }
+
+    private void SearchField()
+    {
+        UpdateDatabase();
+        var prevFilter = Filter;
+        Filter = EditorGUILayout.TextField("Buscador", Filter);
+        if (Filter != prevFilter)
+        {
+            found.Clear();
+            string[] routes = AssetDatabase.FindAssets(Filter);
+            string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
+            for (int i = 0; i < routes.Length; i++)
+            {
+                found.Add(AssetDatabase.GUIDToAssetPath(routes[i]));
+            }
+        }
+
+        for (int i = 0; i < found.Count; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(found[i]);
+
+            if (GUILayout.Button("Seleccionar"))
+            {
+                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i],typeof(Material)));
+                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
+                
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+
+
     }
 
     private void CreateButton()
@@ -116,7 +160,7 @@ public class TableCreator : EditorWindow
                         plane.GetComponent<MeshRenderer>().material = Material;
                     }
                 }
-
+                
             }
             Repaint();
         }
