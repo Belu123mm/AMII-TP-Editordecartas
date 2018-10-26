@@ -11,6 +11,7 @@ public class CardCustomEditor : Editor {
         card = (BaseCard) target;
     }
     public override void OnInspectorGUI() {
+        base.OnInspectorGUI();
         CardName();
         Images();
         Stats();
@@ -21,21 +22,21 @@ public class CardCustomEditor : Editor {
     void CardName() {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Nombre", GUILayout.Width(60));
-        card.cardname = EditorGUILayout.TextField(card.cardname);
+        card.card.cardname = EditorGUILayout.TextField(card.card.cardname);
         EditorGUILayout.EndHorizontal();
     }
     void Images() {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Marco", GUILayout.Width(80));
-        card.frame = (Texture2D) EditorGUILayout.ObjectField(card.frame, typeof(Texture2D), true);
-        Texture2D framepreview = AssetPreview.GetAssetPreview(card.frame);
+        card.card.frame = (Texture) EditorGUILayout.ObjectField(card.card.frame, typeof(Texture), true);
+        Texture2D framepreview = AssetPreview.GetAssetPreview(card.card.frame);
         GUILayout.Box(framepreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Fondo", GUILayout.Width(80));
-        card.background = (Texture2D) EditorGUILayout.ObjectField(card.background, typeof(Texture2D), true);
-        Texture2D backgroundpreview = AssetPreview.GetAssetPreview(card.background);
+        card.card.background = (Texture) EditorGUILayout.ObjectField(card.card.background, typeof(Texture), true);
+        Texture2D backgroundpreview = AssetPreview.GetAssetPreview(card.card.background);
         GUILayout.Box(backgroundpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
@@ -43,14 +44,14 @@ public class CardCustomEditor : Editor {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Ilustracion", GUILayout.Width(80));
-        card.illustration = (Texture2D) EditorGUILayout.ObjectField(card.illustration, typeof(Texture2D), true);
-        Texture2D illustrationpreview = AssetPreview.GetAssetPreview(card.illustration);
+        card.card.illustration = (Texture) EditorGUILayout.ObjectField(card.card.illustration, typeof(Texture), true);
+        Texture2D illustrationpreview = AssetPreview.GetAssetPreview(card.card.illustration);
         GUILayout.Box(illustrationpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Reverso", GUILayout.Width(80));
-        card.back = (Texture2D) EditorGUILayout.ObjectField(card.back, typeof(Texture2D), true);
-        Texture2D backpreview = AssetPreview.GetAssetPreview(card.back);
+        card.card.back = (Texture) EditorGUILayout.ObjectField(card.card.back, typeof(Texture), true);
+        Texture2D backpreview = AssetPreview.GetAssetPreview(card.card.back);
         GUILayout.Box(backpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
@@ -59,48 +60,48 @@ public class CardCustomEditor : Editor {
     void Stats() {
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Vida", GUILayout.Width(60));
-        card.life = EditorGUILayout.IntField(card.life);
+        card.card.life = EditorGUILayout.IntField(card.card.life);
         EditorGUILayout.LabelField("Costo", GUILayout.Width(60));
-        card.cost = EditorGUILayout.IntField(card.cost);
+        card.card.cost = EditorGUILayout.IntField(card.card.cost);
         EditorGUILayout.EndHorizontal();
 
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Energia", GUILayout.Width(60));
-        card.energy = EditorGUILayout.IntField(card.energy);
+        card.card.energy = EditorGUILayout.IntField(card.card.energy);
         EditorGUILayout.LabelField("Mana", GUILayout.Width(60));
-        card.mana = EditorGUILayout.IntField(card.mana);
+        card.card.mana = EditorGUILayout.IntField(card.card.mana);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Ataque", GUILayout.Width(60));
-        card.attack = EditorGUILayout.IntField(card.attack);
+        card.card.attack = EditorGUILayout.IntField(card.card.attack);
         EditorGUILayout.LabelField("Defensa", GUILayout.Width(60));
-        card.defense = EditorGUILayout.IntField(card.defense);
+        card.card.defense = EditorGUILayout.IntField(card.card.defense);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Estrellas", GUILayout.Width(60));
-        card.stars = EditorGUILayout.IntField(card.stars);
+        card.card.stars = EditorGUILayout.IntField(card.card.stars);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Tipo", GUILayout.Width(60));
-        card.cardtype = EditorGUILayout.TextField(card.cardtype);
+        card.card.cardtype = EditorGUILayout.TextField(card.card.cardtype);
         EditorGUILayout.EndHorizontal();
 
     }
 
     void Description() {
         EditorGUILayout.LabelField("Descripcion", GUILayout.Width(80));
-        card.description = EditorGUILayout.TextArea(card.description,GUILayout.Height(60));
+        card.card.description = EditorGUILayout.TextArea(card.card.description,GUILayout.Height(60));
 
         EditorGUILayout.LabelField("Habilidad", GUILayout.Width(80));
-        card.ability = EditorGUILayout.TextArea(card.ability, GUILayout.Height(60));
+        card.card.ability = EditorGUILayout.TextArea(card.card.ability, GUILayout.Height(60));
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Firma", GUILayout.Width(60));
-        card.autorSign = EditorGUILayout.TextField(card.autorSign);
+        card.card.autorSign = EditorGUILayout.TextField(card.card.autorSign);
         EditorGUILayout.EndHorizontal();
 
     }
