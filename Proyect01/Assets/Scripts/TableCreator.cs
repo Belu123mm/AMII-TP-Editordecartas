@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using Object = UnityEngine.Object;
+using System.IO;
 
 public class TableCreator : EditorWindow
 {
@@ -13,7 +15,7 @@ public class TableCreator : EditorWindow
     public Texture2D Design;
     public Material Material;
     public string Filter = "";
-    List<string> found = new List<string>();
+    List<Object> found = new List<Object>();
 
 
     public static void OpenWindow(int times)
@@ -24,12 +26,12 @@ public class TableCreator : EditorWindow
     public void UpdateDatabase()
     {
         AssetDatabase.Refresh();
-    }    
+    }
 
     private void OnEnable()
     {
         minSize = new Vector2(550, 350);
-        maxSize = new Vector2(550 ,8000);
+        maxSize = new Vector2(550, 8000);
     }
 
     private void OnGUI()
@@ -59,7 +61,7 @@ public class TableCreator : EditorWindow
         GUILayout.BeginHorizontal();
         Name = EditorGUILayout.TextField("Nombre:", Name);
         GUILayout.EndHorizontal();
-        if (Name == null)
+        if (Name == null || Name == "")
         {
             EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Warning);
         }
@@ -112,25 +114,24 @@ public class TableCreator : EditorWindow
         if (Filter != prevFilter)
         {
             found.Clear();
-            string[] routes = AssetDatabase.FindAssets(Filter);
+            string[] routes = AssetDatabase.FindAssets(Filter, new string[1] { "Assets/Resources" });
             string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
             for (int i = 0; i < routes.Length; i++)
             {
-                found.Add(AssetDatabase.GUIDToAssetPath(routes[i]));
+                found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D)));
+                found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material)));
             }
         }
 
         for (int i = 0; i < found.Count; i++)
         {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(found[i]);
+            EditorGUILayout.BeginHorizontal();       
+            //if (GUILayout.Button(GUI.DrawTexture(GUILayoutUtility.GetRect(25, 25), AssetPreview.GetAssetPreview(found[i]))))
+            //{
+            //    AssetDatabase.OpenAsset( AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
+            //    AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Material)));
 
-            if (GUILayout.Button("Seleccionar"))
-            {
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i],typeof(Material)));
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
-                
-            }
+            //}
             EditorGUILayout.EndHorizontal();
         }
 
@@ -138,10 +139,11 @@ public class TableCreator : EditorWindow
 
     }
 
+
     private void CreateButton()
     {
-        if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null))) 
-        {          
+        if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null)))
+        {
             if (GUILayout.Button("Create", GUILayout.MaxWidth(500), GUILayout.ExpandWidth(false)))
             {
                 if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null)))
@@ -160,9 +162,11 @@ public class TableCreator : EditorWindow
                         plane.GetComponent<MeshRenderer>().material = Material;
                     }
                 }
-                
+
             }
             Repaint();
         }
     }
+
 }
+
