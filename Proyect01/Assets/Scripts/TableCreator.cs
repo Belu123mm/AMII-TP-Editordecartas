@@ -121,6 +121,11 @@ public class TableCreator : EditorWindow
             found.Clear();
             string[] routes = AssetDatabase.FindAssets(Filter, new string[1] { "Assets/Resources" });
             string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
+            if (routes.Length == 0)
+            {
+                return;
+            }
+
             for (int i = 0; i < routes.Length; i++)
             {
                 found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D)));
