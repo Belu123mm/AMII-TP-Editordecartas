@@ -12,6 +12,7 @@ public class TableCreator : EditorWindow
     public string Name;
     public float WidthSize;
     public float LongSize;
+    private Vector2 _scrollPos;
     public Texture2D Design;
     public Material Material;
     public string Filter = "";
@@ -93,6 +94,9 @@ public class TableCreator : EditorWindow
         Design = (Texture2D)EditorGUILayout.ObjectField("Diseño:", Design, typeof(Texture2D), true);
         Material = (Material)EditorGUILayout.ObjectField(Material, typeof(Material), true);
         GUILayout.EndHorizontal();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
         SearchField();
 
 
@@ -111,6 +115,7 @@ public class TableCreator : EditorWindow
         UpdateDatabase();
         var prevFilter = Filter;
         Filter = EditorGUILayout.TextField("Buscador", Filter);
+        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true, GUILayout.MaxHeight(150));
         if (Filter != prevFilter)
         {
             found.Clear();
@@ -125,16 +130,17 @@ public class TableCreator : EditorWindow
 
         for (int i = 0; i < found.Count; i++)
         {
-            EditorGUILayout.BeginHorizontal();       
-            //if (GUILayout.Button(GUI.DrawTexture(GUILayoutUtility.GetRect(25, 25), AssetPreview.GetAssetPreview(found[i]))))
-            //{
-            //    AssetDatabase.OpenAsset( AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
-            //    AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Material)));
+            EditorGUILayout.BeginHorizontal();
+            GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
+            if (GUILayout.Button("Seleccionar"))
+            {
+                //AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
+                //AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Material)));
 
-            //}
+            }
             EditorGUILayout.EndHorizontal();
         }
-
+        EditorGUILayout.EndScrollView();
 
 
     }
