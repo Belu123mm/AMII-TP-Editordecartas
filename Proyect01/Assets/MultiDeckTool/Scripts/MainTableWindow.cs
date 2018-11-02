@@ -70,7 +70,7 @@ public class MainTableWindow : EditorWindow {
 
     private void DrawButtonTableCreator()
     {
-        if (GUILayout.Button("TableCreator"))
+        if (GUILayout.Button("Table Creator"))
         {
 
             TableCreator.OpenWindow(newWindowAmount);
