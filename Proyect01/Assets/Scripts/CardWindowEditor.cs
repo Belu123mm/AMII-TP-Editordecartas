@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 public class CardWindowEditor : EditorWindow {
-    static CardWindowEditor window;
+    public static CardWindowEditor window;
     public BaseCard card;
     [MenuItem("Deck Tools/Card Editor")]
     public static void CreateWindow() {
@@ -18,8 +18,7 @@ public class CardWindowEditor : EditorWindow {
     private void OnGUI() {
 
 
-        EditorGUILayout.LabelField("Grupo");
-        card = (BaseCard) EditorGUILayout.ObjectField(card, typeof(BaseCard), true);
+        EditorGUILayout.LabelField("Editor de Cartas");
 
         /*COSAS QUE TIENEN QUE ESTAR
          *  Nombre v

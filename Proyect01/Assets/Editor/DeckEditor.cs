@@ -13,6 +13,7 @@ public class DeckEditor : Editor
     
     float counter = 0;
 
+
     private void OnEnable()
     {
         _deck = (Deck)target;
@@ -83,6 +84,14 @@ public class DeckEditor : Editor
                 _deck.mainDeck.Remove(_deck.mainDeck[i]);
                 _deck.cardCounter--;
             }
+            if ( GUILayout.Button("Card editor") ) {
+                //Aca esta lo que edites no me mates D: 
+                if (_deck.mainDeck[i])
+                CardWindowEditor.CreateWindow();
+                CardWindowEditor.window.card = _deck.mainDeck [ i ].GetComponent<BaseCard>() ;
+                
+            }
+
             EditorGUILayout.EndHorizontal();
         }
 
