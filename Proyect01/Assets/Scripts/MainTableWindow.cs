@@ -9,7 +9,7 @@ public class MainTableWindow : EditorWindow {
     private int newWindowAmount;
 
 
-    [MenuItem("CustomTools/MyTableBuilder")]
+    [MenuItem("Table Editor/My Table Builder")]
     public static void OpenWindow()
     {
         MainTableWindow myWindow = (MainTableWindow)GetWindow(typeof(MainTableWindow));
@@ -65,7 +65,7 @@ public class MainTableWindow : EditorWindow {
 
     private void DrawText()
     {
-        GUILayout.Label("Bienvenido a My Table Builder, con esta ventana principal podras comenzar a crear tu tablero deseado.");
+        GUILayout.Label("Bienvenido a My Table Builder, con esta ventana principal podras comenzar a crear tu tablero deseado.\nDesigna un nombre, ancho y largo, elige una textura y/o material");
     }
 
     private void DrawButtonTableCreator()

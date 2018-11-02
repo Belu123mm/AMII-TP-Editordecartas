@@ -66,7 +66,7 @@ public class TableCreator : EditorWindow
         {
             EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Warning);
         }
-        //TODO cuando borras el nombre deberia volver a aparecer el warning pero este no reaparece
+
 
         Repaint();
     }
@@ -112,19 +112,26 @@ public class TableCreator : EditorWindow
 
     private void SearchField()
     {
-        UpdateDatabase();
+
+        //EditorGUI.BeginChangeCheck();
         var prevFilter = Filter;
         Filter = EditorGUILayout.TextField("Buscador", Filter);
+
+        // if (EditorGUI.EndChangeCheck())
+        //{
+        UpdateDatabase();
         _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true, GUILayout.MaxHeight(150));
+
         if (Filter != prevFilter)
         {
             found.Clear();
             string[] routes = AssetDatabase.FindAssets(Filter, new string[1] { "Assets/Resources" });
-            string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
             if (routes.Length == 0)
             {
                 return;
             }
+            string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
+
 
             for (int i = 0; i < routes.Length; i++)
             {
@@ -139,13 +146,15 @@ public class TableCreator : EditorWindow
             GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
             if (GUILayout.Button("Seleccionar"))
             {
-                //AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
-                //AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Material)));
+                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i]?.ToString(), typeof(Texture2D)));
+                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i]?.ToString(), typeof(Material)));
 
             }
             EditorGUILayout.EndHorizontal();
         }
         EditorGUILayout.EndScrollView();
+
+        //  }
 
 
     }
