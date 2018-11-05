@@ -19,9 +19,10 @@ public class TableCreator : EditorWindow
     List<Object> found = new List<Object>();
 
 
+
     public static void OpenWindow(int times)
     {
-       TableCreator.GetWindow(typeof(TableCreator));
+        TableCreator.GetWindow(typeof(TableCreator));
     }
 
     public void UpdateDatabase()
@@ -31,7 +32,7 @@ public class TableCreator : EditorWindow
 
     private void OnEnable()
     {
-        minSize = new Vector2(550, 350);
+        minSize = new Vector2(550, 450);
         maxSize = new Vector2(550, 8000);
     }
 
@@ -112,15 +113,15 @@ public class TableCreator : EditorWindow
 
     private void SearchField()
     {
-
-        //EditorGUI.BeginChangeCheck();
         var prevFilter = Filter;
-        Filter = EditorGUILayout.TextField("Buscador", Filter);
 
-        // if (EditorGUI.EndChangeCheck())
-        //{
+        Filter = EditorGUILayout.TextField("Buscador", Filter);
         UpdateDatabase();
         _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true, GUILayout.MaxHeight(150));
+        if (Filter == "")
+        {
+            found.Clear();
+        }
 
         if (Filter != prevFilter)
         {
@@ -130,8 +131,7 @@ public class TableCreator : EditorWindow
             {
                 return;
             }
-            string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
-
+            //string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
 
             for (int i = 0; i < routes.Length; i++)
             {
@@ -146,28 +146,27 @@ public class TableCreator : EditorWindow
 
                 found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D)));
                 found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material)));
-
-
             }
         }
 
         for (int i = 0; i < found.Count; i++)
         {
-            EditorGUILayout.BeginHorizontal();
-            GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
-            if (GUILayout.Button("Seleccionar"))
+            if (found[i] != null)
             {
-                AssetDatabase.OpenAsset(found[i]);
-                AssetDatabase.OpenAsset(found[i]);
+                EditorGUILayout.BeginHorizontal();             
+                GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
+                if (GUILayout.Button("Seleccionar"))
+                {
+                    AssetDatabase.OpenAsset(found[i]);
 
+                }
+
+                EditorGUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
+
         }
+
         EditorGUILayout.EndScrollView();
-
-        //  }
-
-
     }
 
 
