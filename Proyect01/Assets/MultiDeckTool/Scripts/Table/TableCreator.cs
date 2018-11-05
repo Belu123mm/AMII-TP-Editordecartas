@@ -21,7 +21,7 @@ public class TableCreator : EditorWindow
 
     public static void OpenWindow(int times)
     {
-        var Table = (TableCreator)GetWindow(typeof(TableCreator));
+       TableCreator.GetWindow(typeof(TableCreator));
     }
 
     public void UpdateDatabase()
@@ -125,7 +125,7 @@ public class TableCreator : EditorWindow
         if (Filter != prevFilter)
         {
             found.Clear();
-            string[] routes = AssetDatabase.FindAssets(Filter, new string[2] { "Assets/MultiDeckTool/Resources","" });
+            string[] routes = AssetDatabase.FindAssets(Filter, new string[2] { "Assets/MultiDeckTool/Resources/Materials", "Assets/MultiDeckTool/Resources/Texturas" });
             if (routes.Length == 0)
             {
                 return;
