@@ -125,7 +125,7 @@ public class TableCreator : EditorWindow
         if (Filter != prevFilter)
         {
             found.Clear();
-            string[] routes = AssetDatabase.FindAssets(Filter, new string[1] { "Assets/Resources" });
+            string[] routes = AssetDatabase.FindAssets(Filter, new string[2] { "Assets/MultiDeckTool/Resources","" });
             if (routes.Length == 0)
             {
                 return;
@@ -135,8 +135,19 @@ public class TableCreator : EditorWindow
 
             for (int i = 0; i < routes.Length; i++)
             {
+                var _texture = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D));
+                var _material = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material));
+
+                if (_texture != null & _material != null)
+                {
+                    found.Add(_texture);
+                    found.Add(_material);
+                }
+
                 found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D)));
                 found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material)));
+
+
             }
         }
 
@@ -146,8 +157,8 @@ public class TableCreator : EditorWindow
             GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
             if (GUILayout.Button("Seleccionar"))
             {
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i]?.ToString(), typeof(Texture2D)));
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i]?.ToString(), typeof(Material)));
+                AssetDatabase.OpenAsset(found[i]);
+                AssetDatabase.OpenAsset(found[i]);
 
             }
             EditorGUILayout.EndHorizontal();
