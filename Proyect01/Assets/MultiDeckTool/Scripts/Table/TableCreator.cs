@@ -155,9 +155,10 @@ public class TableCreator : EditorWindow
             {
                 EditorGUILayout.BeginHorizontal();             
                 GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
-                if (GUILayout.Button("Seleccionar"))
+                if (GUILayout.Button("Abrir Ruta"))
                 {
-                    AssetDatabase.OpenAsset(found[i]);
+                    //AssetDatabase.OpenAsset(found[i]);
+                    Selection.activeObject = found[i];
 
                 }
 
