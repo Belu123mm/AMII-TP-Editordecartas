@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using Object = UnityEngine.Object;
+using System.IO;
 
 public class TableCreator : EditorWindow
 {
@@ -10,26 +12,28 @@ public class TableCreator : EditorWindow
     public string Name;
     public float WidthSize;
     public float LongSize;
+    private Vector2 _scrollPos;
     public Texture2D Design;
     public Material Material;
     public string Filter = "";
-    List<string> found = new List<string>();
+    List<Object> found = new List<Object>();
+
 
 
     public static void OpenWindow(int times)
     {
-        var Table = (TableCreator)GetWindow(typeof(TableCreator));
+        TableCreator.GetWindow(typeof(TableCreator));
     }
 
     public void UpdateDatabase()
     {
         AssetDatabase.Refresh();
-    }    
+    }
 
     private void OnEnable()
     {
-        minSize = new Vector2(550, 350);
-        maxSize = new Vector2(550 ,8000);
+        minSize = new Vector2(550, 450);
+        maxSize = new Vector2(550, 8000);
     }
 
     private void OnGUI()
@@ -59,11 +63,11 @@ public class TableCreator : EditorWindow
         GUILayout.BeginHorizontal();
         Name = EditorGUILayout.TextField("Nombre:", Name);
         GUILayout.EndHorizontal();
-        if (Name == null)
+        if (Name == null || Name == "")
         {
             EditorGUILayout.HelpBox("El Plano creado debe tener un nombre", MessageType.Warning);
         }
-        //TODO cuando borras el nombre deberia volver a aparecer el warning pero este no reaparece
+
 
         Repaint();
     }
@@ -91,6 +95,9 @@ public class TableCreator : EditorWindow
         Design = (Texture2D)EditorGUILayout.ObjectField("Diseño:", Design, typeof(Texture2D), true);
         Material = (Material)EditorGUILayout.ObjectField(Material, typeof(Material), true);
         GUILayout.EndHorizontal();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
         SearchField();
 
 
@@ -106,42 +113,68 @@ public class TableCreator : EditorWindow
 
     private void SearchField()
     {
-        UpdateDatabase();
         var prevFilter = Filter;
+
         Filter = EditorGUILayout.TextField("Buscador", Filter);
+        UpdateDatabase();
+        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, true, true, GUILayout.MaxHeight(150));
+        if (Filter == "")
+        {
+            found.Clear();
+        }
+
         if (Filter != prevFilter)
         {
             found.Clear();
-            string[] routes = AssetDatabase.FindAssets(Filter);
-            string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
+            string[] routes = AssetDatabase.FindAssets(Filter, new string[2] { "Assets/MultiDeckTool/Resources/Materials", "Assets/MultiDeckTool/Resources/Texturas" });
+            if (routes.Length == 0)
+            {
+                return;
+            }
+            //string realPath = AssetDatabase.GUIDToAssetPath(routes[0]);
+
             for (int i = 0; i < routes.Length; i++)
             {
-                found.Add(AssetDatabase.GUIDToAssetPath(routes[i]));
+                var _texture = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D));
+                var _material = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material));
+
+                if (_texture != null & _material != null)
+                {
+                    found.Add(_texture);
+                    found.Add(_material);
+                }
+
+                found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Texture2D)));
+                found.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(routes[i]), typeof(Material)));
             }
         }
 
         for (int i = 0; i < found.Count; i++)
         {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(found[i]);
-
-            if (GUILayout.Button("Seleccionar"))
+            if (found[i] != null)
             {
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i],typeof(Material)));
-                AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(found[i], typeof(Texture2D)));
-                
+                EditorGUILayout.BeginHorizontal();             
+                GUI.DrawTexture(GUILayoutUtility.GetRect(100, 100), AssetPreview.GetAssetPreview(found[i]), ScaleMode.ScaleToFit);
+                if (GUILayout.Button("Abrir Ruta"))
+                {
+                    //AssetDatabase.OpenAsset(found[i]);
+                    Selection.activeObject = found[i];
+
+                }
+
+                EditorGUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
+
         }
 
-
-
+        EditorGUILayout.EndScrollView();
     }
+
 
     private void CreateButton()
     {
-        if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null))) 
-        {          
+        if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null)))
+        {
             if (GUILayout.Button("Create", GUILayout.MaxWidth(500), GUILayout.ExpandWidth(false)))
             {
                 if (Name != null && WidthSize != 0 && LongSize != 0 && ((Design != null && Material == null) || (Design == null && Material != null)))
@@ -160,9 +193,11 @@ public class TableCreator : EditorWindow
                         plane.GetComponent<MeshRenderer>().material = Material;
                     }
                 }
-                
+
             }
             Repaint();
         }
     }
+
 }
+
