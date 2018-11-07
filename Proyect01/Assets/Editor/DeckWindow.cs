@@ -31,6 +31,8 @@ public class DeckWindow : EditorWindow
     {
         if (focusedWindow == this)
         {
+            if (_deck.mainDeck.Count < _deck.deckMinCards) EditorGUILayout.HelpBox(("Deck doesn't have minimum deck cards to play, it needs minimum "+(_deck.deckMinCards)+" to play"), MessageType.Warning);
+            if (_deck.mainDeck.Count >= _deck.deckMinCards) EditorGUILayout.HelpBox(("Deck available to play"), MessageType.Info);
             int counter = 0;
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             EditorGUILayout.BeginHorizontal();
