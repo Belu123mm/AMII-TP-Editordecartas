@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [ExecuteInEditMode]
 public class BaseCard : MonoBehaviour {
 
     public CardSO card;
-    public TextMesh title;
-    public TextMesh description;
+    public TextMeshPro title;
+    public TextMeshPro description;
 
     public MeshRenderer frame;
     public MeshRenderer illustration;
@@ -15,7 +16,7 @@ public class BaseCard : MonoBehaviour {
     public List<Material> materials;
     public Shader sh;
 
-    public void Awake() {
+    public void Start() {
             materials.Clear();
         if ( card ) {
 
