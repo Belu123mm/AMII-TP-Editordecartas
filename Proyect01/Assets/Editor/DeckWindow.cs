@@ -31,6 +31,8 @@ public class DeckWindow : EditorWindow
     {
         if (focusedWindow == this)
         {
+            if (_deck.mainDeck.Count < _deck.deckMinCards) EditorGUILayout.HelpBox(("Deck doesn't have minimum deck cards to play, it needs minimum "+(_deck.deckMinCards)+" to play"), MessageType.Warning);
+            if (_deck.mainDeck.Count >= _deck.deckMinCards) EditorGUILayout.HelpBox(("Deck available to play"), MessageType.Info);
             int counter = 0;
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             EditorGUILayout.BeginHorizontal();
@@ -45,8 +47,6 @@ public class DeckWindow : EditorWindow
                     counter = 0;
                 }
                 //EditorGUI.DrawPreviewTexture(GUILayoutUtility.GetRect(1, 1).SetWidth(200).SetHeight(200), texture);
-                GUI.DrawTexture(GUILayoutUtility.GetRect(1, 1).SetWidth(100).SetHeight(100), texture, ScaleMode.ScaleToFit);
-                counter++;
                 if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.Height(20)) && _deck.cardCounter < _deck.deckMaxCards)
                 {
                     _deck.mainDeck.Add(_deck.mainDeck[i]);
@@ -57,7 +57,8 @@ public class DeckWindow : EditorWindow
                     _deck.mainDeck.Remove(_deck.mainDeck[i]);
                     _deck.cardCounter--;
                 }
-                GUILayout.Space(60);
+                GUI.DrawTexture(GUILayoutUtility.GetRect(1, 1).SetWidth(100).SetHeight(100), texture, ScaleMode.ScaleToFit);
+                counter++;
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndScrollView();
