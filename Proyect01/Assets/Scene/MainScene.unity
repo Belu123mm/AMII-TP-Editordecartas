@@ -113,7 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &682952250
+--- !u!21 &233714464
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ Material:
     m_Floats: []
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!21 &1214256402
+--- !u!21 &871638206
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ Material:
     m_Floats: []
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!21 &1672878243
+--- !u!21 &1383477815
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -253,32 +253,32 @@ Prefab:
         type: 2}
       propertyPath: materials.Array.data[0]
       value: 
-      objectReference: {fileID: 682952250}
+      objectReference: {fileID: 233714464}
     - target: {fileID: 114621131781139134, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: materials.Array.data[1]
       value: 
-      objectReference: {fileID: 1672878243}
+      objectReference: {fileID: 1383477815}
     - target: {fileID: 114621131781139134, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: materials.Array.data[2]
       value: 
-      objectReference: {fileID: 1214256402}
+      objectReference: {fileID: 871638206}
     - target: {fileID: 23828943502973122, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1214256402}
+      objectReference: {fileID: 871638206}
     - target: {fileID: 23732687424317860, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 682952250}
+      objectReference: {fileID: 233714464}
     - target: {fileID: 23073251297186076, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1672878243}
+      objectReference: {fileID: 1383477815}
     - target: {fileID: 114304778766811600, guid: 004a927013756e5478f43c79624a1624,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -298,6 +298,11 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114621131781139134, guid: 004a927013756e5478f43c79624a1624,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 004a927013756e5478f43c79624a1624, type: 2}
@@ -333,9 +338,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainDeck: []
+  hand: []
+  tryDeck: []
   card2Add: {fileID: 0}
+  hand1stDraw: 0
   deckMaxCards: 0
   cardCounter: 0
+  deckMinCards: 0
 --- !u!65 &1870236603
 BoxCollider:
   m_ObjectHideFlags: 0
