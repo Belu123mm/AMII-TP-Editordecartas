@@ -144,11 +144,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainDeck:
-  - {fileID: 0}
+  - {fileID: 114599063035274180, guid: b60e96ff9acb1bd4d957e23e90a892c4, type: 2}
   hand: []
   tryDeck:
   - {fileID: 0}
-  card2Add: {fileID: 0}
+  card2Add: {fileID: 114599063035274180, guid: b60e96ff9acb1bd4d957e23e90a892c4, type: 2}
   hand1stDraw: 0
   deckMaxCards: 10
   cardCounter: 1

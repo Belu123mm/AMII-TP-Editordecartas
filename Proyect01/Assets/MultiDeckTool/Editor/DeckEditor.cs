@@ -83,10 +83,14 @@ public class DeckEditor : Editor
             }
             if ( GUILayout.Button("Edit Card") ) {
                 //Aca esta lo que edites no me mates D: 
-                if (_deck.mainDeck[i])
                 CardWindowEditor.CreateWindow();
+                if ( _deck.mainDeck [ i ] ) {
+
                 CardWindowEditor.window.card = _deck.mainDeck [ i ];
-                
+                }
+                Debug.Log(_deck.mainDeck [ i ]);
+
+
             }
 
             EditorGUILayout.EndHorizontal();

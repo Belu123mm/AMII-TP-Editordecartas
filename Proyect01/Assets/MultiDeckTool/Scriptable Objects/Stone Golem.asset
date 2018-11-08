@@ -17,12 +17,12 @@ MonoBehaviour:
   defense: 0
   mana: 0
   stars: 0
-  description: 
-  illustration: {fileID: 0}
-  frame: {fileID: 0}
-  back: {fileID: 0}
-  icon: {fileID: 0}
-  cardname: 
+  description: A protector golem from Gyrza
+  illustration: {fileID: 2800000, guid: b9826b8a2336c9f41bdb1113d75ab90d, type: 3}
+  frame: {fileID: 2800000, guid: 1e1b3cfcda3570b4782d8fbb874d2c78, type: 3}
+  back: {fileID: 2800000, guid: aecc39fedd2f1dc4db56ca4fe8b627f4, type: 3}
+  icon: {fileID: 2800000, guid: 68507cbc760b05f4c8f4d0d96269050c, type: 3}
+  cardname: Stone Golem
   autorSign: 
   cardtype: 
   cost: 0

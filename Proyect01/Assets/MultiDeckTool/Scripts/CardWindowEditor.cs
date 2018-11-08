@@ -44,12 +44,11 @@ public class CardWindowEditor : EditorWindow {
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
+        }
 
             if ( GUILayout.Button("Guardar") ) {
                 Debug.Log("Guardadox");
-                //Aca va lo de enviar la carta de vuelta a la ventana xd y cerrarla
-            }
-        }
+                this.Close();            }
 
     }
     public void Name() {
@@ -70,9 +69,9 @@ public class CardWindowEditor : EditorWindow {
     }
     public void Illustration() {
         EditorGUILayout.LabelField("Marco", GUILayout.Width(80));
-        card.card.frame = (Texture2D) EditorGUILayout.ObjectField(card.card.frame, typeof(Texture2D), true);
-        Texture2D framepreview = AssetPreview.GetAssetPreview(card.frame);
-        GUILayout.BeginArea(new Rect(4, 95, 200, 280));
+        card.card.frame = (Texture) EditorGUILayout.ObjectField(card.card.frame, typeof(Texture), true);
+        Texture2D framepreview = AssetPreview.GetAssetPreview(card.card.frame);
+        GUILayout.BeginArea(new Rect(4, 75, 200, 280));
         GUI.DrawTexture(new Rect(35, 0, 112.5f, 175), framepreview);
         GUILayout.EndArea();
 

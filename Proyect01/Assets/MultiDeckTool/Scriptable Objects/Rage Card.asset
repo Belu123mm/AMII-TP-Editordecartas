@@ -21,7 +21,7 @@ MonoBehaviour:
   illustration: {fileID: 2800000, guid: 01e53fbaed33dd949b4119c9012a6207, type: 3}
   frame: {fileID: 2800000, guid: 6f88786876d45d14188338b8f99a1052, type: 3}
   back: {fileID: 2800000, guid: 8f8a3c2420be58c47acec071acc65028, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 2800000, guid: 8e47269249cfa8548973a519266eb15e, type: 3}
   cardname: Rage
   autorSign: 
   cardtype: 
