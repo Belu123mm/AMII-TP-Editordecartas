@@ -9,10 +9,13 @@ public class BaseCard : MonoBehaviour {
     public CardSO card;
     public TextMeshPro title;
     public TextMeshPro description;
+    public TextMeshPro ability;
 
     public MeshRenderer frame;
     public MeshRenderer illustration;
     public MeshRenderer back;
+    public MeshRenderer icon;
+
     public List<Material> materials;
     public Shader sh;
 
@@ -22,7 +25,7 @@ public class BaseCard : MonoBehaviour {
 
             title.text = card.cardname;
             description.text = card.description;
-
+            ability.text = card.ability;
 
             Material frameMaterial = new Material(sh);
             frameMaterial.mainTexture = card.frame;
@@ -39,7 +42,10 @@ public class BaseCard : MonoBehaviour {
             materials.Add(backMaterial);
             back.GetComponent<Renderer>().material = backMaterial;
 
-
+            Material iconMaterial = new Material(sh);
+            iconMaterial.mainTexture = card.icon;
+            materials.Add(iconMaterial);
+            icon.GetComponent<Renderer>().material = iconMaterial;
         }
 
     }

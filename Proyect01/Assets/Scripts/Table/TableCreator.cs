@@ -6,7 +6,7 @@ using System;
 using Object = UnityEngine.Object;
 using System.IO;
 
-public class TableCreator : EditorWindow
+public class BoardCreator : EditorWindow
 {
 
     public string Name;
@@ -22,7 +22,7 @@ public class TableCreator : EditorWindow
 
     public static void OpenWindow(int times)
     {
-        TableCreator.GetWindow(typeof(TableCreator));
+        BoardCreator.GetWindow(typeof(BoardCreator));
     }
 
     public void UpdateDatabase()

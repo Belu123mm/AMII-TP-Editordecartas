@@ -16,8 +16,8 @@ public class CardSO : ScriptableObject {
     public string description;
     public Texture illustration;
     public Texture frame;
-    public Texture background;
     public Texture back;
+    public Texture icon;
     public string cardname;
     public string autorSign;
     public string cardtype;

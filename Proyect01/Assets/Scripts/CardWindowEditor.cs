@@ -6,7 +6,6 @@ using UnityEditor;
 public class CardWindowEditor : EditorWindow {
     public static CardWindowEditor window;
     public BaseCard card;
-    [MenuItem("Deck Tools/Card Editor")]
     public static void CreateWindow() {
         window = (CardWindowEditor) GetWindow(typeof(CardWindowEditor));
 

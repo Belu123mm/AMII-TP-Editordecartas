@@ -26,35 +26,45 @@ public class CardCustomEditor : Editor {
         EditorGUILayout.EndHorizontal();
     }
     void Images() {
+
         EditorGUILayout.BeginHorizontal();
+
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Marco", GUILayout.Width(80));
         card.card.frame = (Texture) EditorGUILayout.ObjectField(card.card.frame, typeof(Texture), true);
-        Texture2D framepreview = AssetPreview.GetAssetPreview(card.card.frame);
-        GUILayout.Box(framepreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical();
-        EditorGUILayout.LabelField("Fondo", GUILayout.Width(80));
-        card.card.background = (Texture) EditorGUILayout.ObjectField(card.card.background, typeof(Texture), true);
-        Texture2D backgroundpreview = AssetPreview.GetAssetPreview(card.card.background);
-        GUILayout.Box(backgroundpreview, GUILayout.Width(90), GUILayout.Height(140));
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Ilustracion", GUILayout.Width(80));
         card.card.illustration = (Texture) EditorGUILayout.ObjectField(card.card.illustration, typeof(Texture), true);
-        Texture2D illustrationpreview = AssetPreview.GetAssetPreview(card.card.illustration);
-        GUILayout.Box(illustrationpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
+
         EditorGUILayout.BeginVertical();
         EditorGUILayout.LabelField("Reverso", GUILayout.Width(80));
         card.card.back = (Texture) EditorGUILayout.ObjectField(card.card.back, typeof(Texture), true);
-        Texture2D backpreview = AssetPreview.GetAssetPreview(card.card.back);
-        GUILayout.Box(backpreview, GUILayout.Width(90), GUILayout.Height(140));
         EditorGUILayout.EndVertical();
+
         EditorGUILayout.EndHorizontal();
+
+        GUILayout.Box(GUIContent.none, GUILayout.Width(391), GUILayout.Height(200));
+
+        Texture2D framepreview = AssetPreview.GetAssetPreview(card.card.frame);
+        GUILayout.BeginArea(new Rect(0, 512, 500, 200));
+        GUI.DrawTexture(new Rect(17, 0, 120, 190), framepreview);
+        GUILayout.EndArea();
+
+        Texture2D illustrationpreview = AssetPreview.GetAssetPreview(card.card.illustration);
+        GUILayout.BeginArea(new Rect(0, 512, 500, 200));
+        GUI.DrawTexture(new Rect(150, 0, 120, 120), illustrationpreview);
+        GUILayout.EndArea();
+
+
+        Texture2D backpreview = AssetPreview.GetAssetPreview(card.card.back);
+        GUILayout.BeginArea(new Rect(0, 512, 500, 200));
+        GUI.DrawTexture(new Rect(280, 0, 120, 190), backpreview);
+        GUILayout.EndArea();
+
+
         Repaint();
     }
     void Stats() {
@@ -84,10 +94,15 @@ public class CardCustomEditor : Editor {
         EditorGUILayout.LabelField("Estrellas", GUILayout.Width(60));
         card.card.stars = EditorGUILayout.IntField(card.card.stars);
         EditorGUILayout.EndHorizontal();
-
+        EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Tipo", GUILayout.Width(60));
-        card.card.cardtype = EditorGUILayout.TextField(card.card.cardtype);
+        card.card.cardtype = EditorGUILayout.TextField(card.card.cardtype,GUILayout.Width(170));
+        card.card.icon = (Texture) EditorGUILayout.ObjectField(card.card.icon, typeof(Texture), true);
+        Texture2D iconpreview = AssetPreview.GetAssetPreview(card.card.icon);
+        GUILayout.Box(iconpreview, GUILayout.Width(20), GUILayout.Height(20));
+
+
         EditorGUILayout.EndHorizontal();
 
     }

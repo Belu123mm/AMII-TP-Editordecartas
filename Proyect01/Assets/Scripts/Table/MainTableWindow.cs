@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class MainTableWindow : EditorWindow {
+public class BoardWindow : EditorWindow {
 
     private GUIStyle _tittleStyle;
     private int newWindowAmount;
 
 
-    [MenuItem("Table Editor/My Table Builder")]
+    [MenuItem("Deck Tools/Board Editor")]
+
     public static void OpenWindow()
     {
-        MainTableWindow myWindow = (MainTableWindow)GetWindow(typeof(MainTableWindow));
+        BoardWindow myWindow = (BoardWindow)GetWindow(typeof(BoardWindow));
         myWindow.wantsMouseMove = true;
         myWindow.Show();
     }
@@ -73,7 +74,7 @@ public class MainTableWindow : EditorWindow {
         if (GUILayout.Button("Table Creator"))
         {
 
-            TableCreator.OpenWindow(newWindowAmount);
+            BoardCreator.OpenWindow(newWindowAmount);
             newWindowAmount++;
         }
 

@@ -21,7 +21,7 @@ public class DeckEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        _deck.card2Add = (GameObject)EditorGUILayout.ObjectField("Card to add", _deck.card2Add, typeof(GameObject), false);
+        _deck.card2Add = (BaseCard) EditorGUILayout.ObjectField("Card to add", _deck.card2Add, typeof(BaseCard), false);
         _deck.deckMaxCards = EditorGUILayout.IntField("Max card ammount", _deck.deckMaxCards);
         _deck.deckMinCards = EditorGUILayout.IntField("Min card ammount", _deck.deckMinCards);
 
@@ -66,14 +66,11 @@ public class DeckEditor : Editor
         {
             HandWindow.ShowWindow();
         }
-        if (GUILayout.Button("Card editor"))
-        {
-            CardWindowEditor.CreateWindow();
-        }
         for (int i = 0; i < _deck.mainDeck.Count; i++)
         { 
-            _deck.mainDeck[i] = (GameObject)EditorGUILayout.ObjectField(("Card "+ (i+1)), _deck.mainDeck[i], typeof(GameObject), false);
             EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Card " + (i +1), GUILayout.Width(60));
+            _deck.mainDeck[i] = (BaseCard) EditorGUILayout.ObjectField( _deck.mainDeck[i], typeof(BaseCard), false);
             if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.Height(20)) && _deck.cardCounter < _deck.deckMaxCards)
             {
                 _deck.mainDeck.Add(_deck.mainDeck[i]);
@@ -84,11 +81,11 @@ public class DeckEditor : Editor
                 _deck.mainDeck.Remove(_deck.mainDeck[i]);
                 _deck.cardCounter--;
             }
-            if ( GUILayout.Button("Card editor") ) {
+            if ( GUILayout.Button("Edit Card") ) {
                 //Aca esta lo que edites no me mates D: 
                 if (_deck.mainDeck[i])
                 CardWindowEditor.CreateWindow();
-                CardWindowEditor.window.card = _deck.mainDeck [ i ].GetComponent<BaseCard>() ;
+                CardWindowEditor.window.card = _deck.mainDeck [ i ];
                 
             }
 

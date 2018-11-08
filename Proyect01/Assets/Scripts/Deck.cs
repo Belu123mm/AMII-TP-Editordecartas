@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour {
 
-    public List<GameObject> mainDeck = new List<GameObject>();
-    public List<GameObject> hand = new List<GameObject>();
-    public List<GameObject> tryDeck = new List<GameObject>();
-    public GameObject card2Add;
+    public List<BaseCard> mainDeck = new List<BaseCard>();
+    public List<BaseCard> hand = new List<BaseCard>();
+    public List<BaseCard> tryDeck = new List<BaseCard>();
+    public BaseCard card2Add;
     public int hand1stDraw;
     public int deckMaxCards;
     public int cardCounter;

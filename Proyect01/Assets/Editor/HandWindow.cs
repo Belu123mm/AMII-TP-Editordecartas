@@ -20,7 +20,7 @@ public class HandWindow : EditorWindow
         _deck.hand.RemoveRange(0, _deck.hand.Count);
         startGame = false;
 
-        _deck.tryDeck = new List<GameObject>(_deck.mainDeck);
+        _deck.tryDeck = new List<BaseCard>(_deck.mainDeck);
     }
 
     [MenuItem("Deck Tools/ Hand Visualiser")]
@@ -72,7 +72,7 @@ public class HandWindow : EditorWindow
 
             if (GUILayout.Button("Restart all", GUILayout.Width(100), GUILayout.Height(100)))
             {
-                _deck.tryDeck = new List<GameObject>(_deck.mainDeck);
+                _deck.tryDeck = new List<BaseCard>(_deck.mainDeck);
                 _deck.hand.RemoveRange(0, _deck.hand.Count);
             }
 
