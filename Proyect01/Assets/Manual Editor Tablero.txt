@@ -1,0 +1,4 @@
+Para hacer uso del Editor de Tableros, tenemos que ir a la pestaña de Unity que figura Table Editor, le hacemos click y despues seleccionamos My Table Builder. 
+Luego en la ventana emergente, hacemos click en el boton Table Creator.
+En la nueva ventana vamos a poder elegir todos los parametros que querramos que tenga nuestro tablero. 
+Una vez todos los parametros esten completos, le da mos al boton Create y se instanciara el tablero deseado. 

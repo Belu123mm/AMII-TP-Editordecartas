@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8216d3588888647a454444e1614874, type: 3}
+  m_Name: Stone Golem
+  m_EditorClassIdentifier: 
+  life: 0
+  energy: 0
+  attack: 0
+  defense: 0
+  mana: 0
+  stars: 0
+  description: A protector golem from Gyrza
+  illustration: {fileID: 2800000, guid: b9826b8a2336c9f41bdb1113d75ab90d, type: 3}
+  frame: {fileID: 2800000, guid: 1e1b3cfcda3570b4782d8fbb874d2c78, type: 3}
+  back: {fileID: 2800000, guid: aecc39fedd2f1dc4db56ca4fe8b627f4, type: 3}
+  icon: {fileID: 2800000, guid: 68507cbc760b05f4c8f4d0d96269050c, type: 3}
+  cardname: Stone Golem
+  autorSign: 
+  cardtype: 
+  cost: 0
+  ability: 

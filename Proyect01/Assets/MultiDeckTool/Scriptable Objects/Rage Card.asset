@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8216d3588888647a454444e1614874, type: 3}
+  m_Name: Rage Card
+  m_EditorClassIdentifier: 
+  life: 0
+  energy: 0
+  attack: 0
+  defense: 0
+  mana: 0
+  stars: 0
+  description: You feel an incontrollable fire in your chest.
+  illustration: {fileID: 2800000, guid: 01e53fbaed33dd949b4119c9012a6207, type: 3}
+  frame: {fileID: 2800000, guid: 6f88786876d45d14188338b8f99a1052, type: 3}
+  back: {fileID: 2800000, guid: 8f8a3c2420be58c47acec071acc65028, type: 3}
+  icon: {fileID: 2800000, guid: 8e47269249cfa8548973a519266eb15e, type: 3}
+  cardname: Rage
+  autorSign: 
+  cardtype: 
+  cost: 0
+  ability: 
