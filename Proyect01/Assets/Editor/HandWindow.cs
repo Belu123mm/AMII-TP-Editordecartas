@@ -12,6 +12,7 @@ public class HandWindow : EditorWindow
     private int cardCounter;
     private bool startGame;
     private int drawMore;
+    private int maxHandSize;
 
     public void OnEnable()
     {
@@ -54,6 +55,9 @@ public class HandWindow : EditorWindow
         if (startGame)
         {
             EditorGUILayout.BeginHorizontal();
+
+            maxHandSize = EditorGUILayout.IntField("Max hand size", maxHandSize);
+
             if (GUILayout.Button("Draw", GUILayout.Width(100), GUILayout.Height(100)) && _deck.tryDeck.Count > 0) DrawCard();
 
             if (GUILayout.Button("Shuffle deck", GUILayout.Width(100), GUILayout.Height(100)))
@@ -113,7 +117,10 @@ public class HandWindow : EditorWindow
     }
     public void DrawCard()
     {
-        _deck.hand.Add(_deck.tryDeck[0]);
-        _deck.tryDeck.Remove(_deck.tryDeck[0]);
+        if(_deck.hand.Count < maxHandSize && _deck.hand.Count != 0)
+        {
+            _deck.hand.Add(_deck.tryDeck[0]);
+            _deck.tryDeck.Remove(_deck.tryDeck[0]);
+        }
     }
 }
